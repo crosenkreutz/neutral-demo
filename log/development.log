@@ -357,3 +357,125 @@ Started GET "/" for 127.0.0.1 at Tue Jan 25 23:19:23 +0100 2011
   [1m[35mComment Load (0.2ms)[0m  SELECT "comments".* FROM "comments"
 Rendered comments/index.html.erb within layouts/application (4.3ms)
 Completed 200 OK in 129ms (Views: 12.8ms | ActiveRecord: 0.9ms)
+  [1m[36mSQL (0.4ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.1ms)[0m  select sqlite_version(*)
+  [1m[36mSQL (3.0ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("schema_migrations")
+  [1m[36mSQL (1.8ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.1ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.1ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations"
+Migrating to CreateComments (20110114233014)
+  [1m[36mSQL (0.7ms)[0m  [1mCREATE TABLE "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "body" text, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20110114233014')
+Migrating to DeviseCreateUsers (20110114233300)
+  [1m[36mSQL (0.8ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar(255) DEFAULT '' NOT NULL, "encrypted_password" varchar(128) DEFAULT '' NOT NULL, "password_salt" varchar(255) DEFAULT '' NOT NULL, "reset_password_token" varchar(255), "remember_token" varchar(255), "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar(255), "last_sign_in_ip" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_list("users")
+  [1m[36mSQL (0.3ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35mSQL (0.2ms)[0m  PRAGMA index_list("users")
+  [1m[36mSQL (0.2ms)[0m  [1mPRAGMA index_info('index_users_on_email')[0m
+  [1m[35mSQL (0.2ms)[0m  CREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20110114233300')[0m
+Migrating to CreateRoles (20110115000846)
+  [1m[35mSQL (0.8ms)[0m  CREATE TABLE "roles" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20110115000846')[0m
+Migrating to CreateAssignments (20110115001431)
+  [1m[35mSQL (0.9ms)[0m  CREATE TABLE "assignments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "role_id" integer, "user_id" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20110115001431')[0m
+Migrating to AddCommentToUser (20110115122442)
+  [1m[35mSQL (0.8ms)[0m  ALTER TABLE "comments" ADD "user_id" integer
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20110115122442')[0m
+Migrating to CreateAuthentications (20110115124214)
+  [1m[35mSQL (0.8ms)[0m  CREATE TABLE "authentications" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "provider" varchar(255), "uid" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20110115124214')[0m
+Migrating to AddUsernameToUser (20110125220433)
+  [1m[35mSQL (0.8ms)[0m  ALTER TABLE "users" ADD "user_name" varchar(255)
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20110125220433')[0m
+  [1m[35mSQL (0.3ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations"[0m
+  [1m[35mSQL (0.3ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("assignments")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("authentications")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("comments")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("roles")
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_list("users")[0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_info('index_users_on_reset_password_token')
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_info('index_users_on_email')[0m
+
+
+Started GET "/" for 127.0.0.1 at Wed Jan 26 12:41:27 +0100 2011
+  Processing by CommentsController#index as HTML
+  [1m[36mComment Load (0.6ms)[0m  [1mSELECT "comments".* FROM "comments"[0m
+Rendered comments/index.html.erb within layouts/application (4.5ms)
+Completed 200 OK in 23ms (Views: 11.8ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/authentications" for 127.0.0.1 at Wed Jan 26 12:41:33 +0100 2011
+  Processing by AuthenticationsController#index as HTML
+Rendered authentications/index.html.erb within layouts/application (4.3ms)
+Completed 200 OK in 26ms (Views: 11.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/auth/google_apps" for 127.0.0.1 at Wed Jan 26 12:41:35 +0100 2011
+DEPRECATION WARNING: RAILS_DEFAULT_LOGGER is deprecated. Please use ::Rails.logger. (called from require at script/rails:6)
+Performing discovery for googlemail.com
+Discovering domain googlemail.com
+Retrieving XRDS from https://www.google.com/accounts/o8/id?source=googlemail.com
+
+
+Started GET "/auth/google_apps/callback?_method=post&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0&openid.mode=id_res&openid.op_endpoint=https%3A%2F%2Fwww.google.com%2Faccounts%2Fo8%2Fud%3Fsource%3Dgooglemail.com&openid.response_nonce=2011-01-26T11%3A41%3A37ZBgSd1hQeua2XvQ&openid.return_to=http%3A%2F%2Flocalhost%3A3000%2Fauth%2Fgoogle_apps%2Fcallback%3F_method%3Dpost&openid.assoc_handle=AOQobUet7PoySBSaBF9xg7DpZ9pOYhKqe8Q-8-h-yMLgltkLCzZJopRn&openid.signed=op_endpoint%2Cclaimed_id%2Cidentity%2Creturn_to%2Cresponse_nonce%2Cassoc_handle%2Cns.ext1%2Cext1.mode%2Cext1.type.ext5%2Cext1.value.ext5%2Cext1.type.ext8%2Cext1.value.ext8%2Cext1.type.ext2%2Cext1.value.ext2&openid.sig=mN769hVgimf2CzXVFOwPYg3q5y8%3D&openid.identity=https%3A%2F%2Fwww.google.com%2Faccounts%2Fo8%2Fid%3Fid%3DAItOawnoIWCaLLvnX9FTPxUFSFY6PVe6dme8ChM&openid.claimed_id=https%3A%2F%2Fwww.google.com%2Faccounts%2Fo8%2Fid%3Fid%3DAItOawnoIWCaLLvnX9FTPxUFSFY6PVe6dme8ChM&openid.ns.ext1=http%3A%2F%2Fopenid.net%2Fsrv%2Fax%2F1.0&openid.ext1.mode=fetch_response&openid.ext1.type.ext5=http%3A%2F%2Faxschema.org%2FnamePerson%2Ffirst&openid.ext1.value.ext5=Christian&openid.ext1.type.ext8=http%3A%2F%2Faxschema.org%2Fcontact%2Femail&openid.ext1.value.ext8=crkais%40googlemail.com&openid.ext1.type.ext2=http%3A%2F%2Faxschema.org%2FnamePerson%2Flast&openid.ext1.value.ext2=Kaiser" for 127.0.0.1 at Wed Jan 26 12:41:37 +0100 2011
+  Processing by AuthenticationsController#create as HTML
+  Parameters: {"provider"=>"google_apps"}
+  [1m[35mSQL (0.3ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mAuthentication Load (0.1ms)[0m  [1mSELECT "authentications".* FROM "authentications" WHERE ("authentications"."uid" = 'https://www.google.com/accounts/o8/id?id=AItOawnoIWCaLLvnX9FTPxUFSFY6PVe6dme8ChM') AND ("authentications"."provider" = 'google_apps') LIMIT 1[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT "users"."id" FROM "users" WHERE (LOWER("users"."email") = LOWER('crkais@googlemail.com')) LIMIT 1
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT "users".* FROM "users" WHERE ("users"."user_name" = 'crkais') LIMIT 1[0m
+  [1m[35mRole Load (0.1ms)[0m  SELECT "roles".* FROM "roles" WHERE ("roles"."name" = 'member') LIMIT 1
+  [1m[36mAREL (0.7ms)[0m  [1mINSERT INTO "roles" ("name", "created_at", "updated_at") VALUES ('member', '2011-01-26 11:41:38.489909', '2011-01-26 11:41:38.489909')[0m
+  [1m[35mAREL (2.0ms)[0m  INSERT INTO "users" ("password_salt", "updated_at", "current_sign_in_at", "current_sign_in_ip", "email", "remember_token", "remember_created_at", "last_sign_in_at", "created_at", "reset_password_token", "sign_in_count", "user_name", "last_sign_in_ip", "encrypted_password") VALUES ('', '2011-01-26 11:41:38.504582', NULL, NULL, 'crkais@googlemail.com', NULL, NULL, NULL, '2011-01-26 11:41:38.504582', NULL, 0, 'crkais', NULL, '')
+  [1m[36mAREL (0.3ms)[0m  [1mINSERT INTO "assignments" ("updated_at", "user_id", "created_at", "role_id") VALUES ('2011-01-26 11:41:38.514447', 1, '2011-01-26 11:41:38.514447', 1)[0m
+  [1m[35mAREL (0.2ms)[0m  INSERT INTO "authentications" ("user_id", "updated_at", "uid", "created_at", "provider") VALUES (1, '2011-01-26 11:41:38.517514', 'https://www.google.com/accounts/o8/id?id=AItOawnoIWCaLLvnX9FTPxUFSFY6PVe6dme8ChM', '2011-01-26 11:41:38.517514', 'google_apps')
+  [1m[36mAREL (0.6ms)[0m  [1mUPDATE "users" SET "updated_at" = '2011-01-26 11:41:38.523475', "current_sign_in_at" = '2011-01-26 11:41:38.523061', "current_sign_in_ip" = '127.0.0.1', "last_sign_in_at" = '2011-01-26 11:41:38.523061', "sign_in_count" = 1, "last_sign_in_ip" = '127.0.0.1' WHERE ("users"."id" = 1)[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 156ms
+
+
+Started GET "/" for 127.0.0.1 at Wed Jan 26 12:41:38 +0100 2011
+  Processing by CommentsController#index as HTML
+  [1m[35mUser Load (0.3ms)[0m  SELECT "users".* FROM "users" WHERE ("users"."id" = 1) LIMIT 1
+  [1m[36mRole Load (0.3ms)[0m  [1mSELECT "roles".* FROM "roles" INNER JOIN "assignments" ON "roles".id = "assignments".role_id WHERE (("assignments".user_id = 1))[0m
+  [1m[35mComment Load (0.2ms)[0m  SELECT "comments".* FROM "comments"
+Rendered comments/index.html.erb within layouts/application (3.9ms)
+Completed 200 OK in 62ms (Views: 9.8ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/comments/new" for 127.0.0.1 at Wed Jan 26 12:41:44 +0100 2011
+  Processing by CommentsController#new as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT "users".* FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [1m[35mRole Load (0.3ms)[0m  SELECT "roles".* FROM "roles" INNER JOIN "assignments" ON "roles".id = "assignments".role_id WHERE (("assignments".user_id = 1))
+Rendered comments/_form.html.erb (2.7ms)
+Rendered comments/new.html.erb within layouts/application (7.1ms)
+Completed 200 OK in 71ms (Views: 13.5ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/comments" for 127.0.0.1 at Wed Jan 26 12:41:48 +0100 2011
+  Processing by CommentsController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT "users".* FROM "users" WHERE ("users"."id" = 1) LIMIT 1[0m
+  [1m[35mRole Load (0.3ms)[0m  SELECT "roles".* FROM "roles" INNER JOIN "assignments" ON "roles".id = "assignments".role_id WHERE (("assignments".user_id = 1))
+  [1m[36mComment Load (0.2ms)[0m  [1mSELECT "comments".* FROM "comments"[0m
+Rendered comments/index.html.erb within layouts/application (4.4ms)
+Completed 200 OK in 121ms (Views: 10.3ms | ActiveRecord: 0.8ms)
