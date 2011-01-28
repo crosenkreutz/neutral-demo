@@ -479,3 +479,1130 @@ Started GET "/comments" for 127.0.0.1 at Wed Jan 26 12:41:48 +0100 2011
   [1m[36mComment Load (0.2ms)[0m  [1mSELECT "comments".* FROM "comments"[0m
 Rendered comments/index.html.erb within layouts/application (4.4ms)
 Completed 200 OK in 121ms (Views: 10.3ms | ActiveRecord: 0.8ms)
+  [1m[36mSQL (0.4ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.1ms)[0m  select sqlite_version(*)
+  [1m[36mSQL (3.4ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("schema_migrations")
+  [1m[36mSQL (2.0ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mSQL (0.1ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.1ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.1ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations"
+Migrating to CreateComments (20110114233014)
+  [1m[36mSQL (0.6ms)[0m  [1mCREATE TABLE "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "body" text, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20110114233014')
+Migrating to DeviseCreateUsers (20110114233300)
+  [1m[36mSQL (0.7ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar(255) DEFAULT '' NOT NULL, "encrypted_password" varchar(128) DEFAULT '' NOT NULL, "password_salt" varchar(255) DEFAULT '' NOT NULL, "reset_password_token" varchar(255), "remember_token" varchar(255), "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar(255), "last_sign_in_ip" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_list("users")
+  [1m[36mSQL (0.2ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_list("users")
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_info('index_users_on_email')[0m
+  [1m[35mSQL (0.2ms)[0m  CREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20110114233300')[0m
+Migrating to CreateRoles (20110115000846)
+  [1m[35mSQL (0.8ms)[0m  CREATE TABLE "roles" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20110115000846')[0m
+Migrating to CreateAssignments (20110115001431)
+  [1m[35mSQL (0.9ms)[0m  CREATE TABLE "assignments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "role_id" integer, "user_id" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20110115001431')[0m
+Migrating to AddCommentToUser (20110115122442)
+  [1m[35mSQL (0.8ms)[0m  ALTER TABLE "comments" ADD "user_id" integer
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20110115122442')[0m
+Migrating to CreateAuthentications (20110115124214)
+  [1m[35mSQL (0.8ms)[0m  CREATE TABLE "authentications" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "provider" varchar(255), "uid" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20110115124214')[0m
+Migrating to AddUsernameToUser (20110125220433)
+  [1m[35mSQL (0.8ms)[0m  ALTER TABLE "users" ADD "user_name" varchar(255)
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20110125220433')[0m
+Migrating to CreateConstituencies (20110128132614)
+  [1m[35mSQL (0.7ms)[0m  CREATE TABLE "constituencies" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "number" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20110128132614')[0m
+  [1m[35mSQL (0.4ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations"[0m
+  [1m[35mSQL (0.3ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("assignments")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("authentications")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("comments")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("constituencies")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("roles")[0m
+  [1m[35mSQL (0.2ms)[0m  PRAGMA index_list("users")
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_info('index_users_on_reset_password_token')[0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_info('index_users_on_email')
+
+
+Started GET "/constituencies" for 127.0.0.1 at Fri Jan 28 14:26:53 +0100 2011
+  Processing by ConstituenciesController#index as HTML
+  [1m[36mConstituency Load (0.6ms)[0m  [1mSELECT "constituencies".* FROM "constituencies"[0m
+Rendered constituencies/index.html.erb within layouts/application (4.0ms)
+Completed 200 OK in 19ms (Views: 12.2ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/constituencies/new" for 127.0.0.1 at Fri Jan 28 14:27:45 +0100 2011
+  Processing by ConstituenciesController#new as HTML
+Rendered constituencies/_form.html.erb (5.5ms)
+Rendered constituencies/new.html.erb within layouts/application (10.4ms)
+Completed 200 OK in 36ms (Views: 16.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/constituencies" for 127.0.0.1 at Fri Jan 28 14:27:50 +0100 2011
+  Processing by ConstituenciesController#create as HTML
+  Parameters: {"commit"=>"Create Constituency", "authenticity_token"=>"4KO5ytHX894tM2Pa7rKe02PhskWen+O+fIh7r+teQqQ=", "utf8"=>"✓", "constituency"=>{"number"=>"222"}}
+  [1m[35mSQL (0.3ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mAREL (0.7ms)[0m  [1mINSERT INTO "constituencies" ("created_at", "number", "updated_at") VALUES ('2011-01-28 13:27:50.902573', 222, '2011-01-28 13:27:50.902573')[0m
+Redirected to http://localhost:3000/constituencies/1
+Completed 302 Found in 38ms
+
+
+Started GET "/constituencies/1" for 127.0.0.1 at Fri Jan 28 14:27:50 +0100 2011
+  Processing by ConstituenciesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mConstituency Load (0.2ms)[0m  SELECT "constituencies".* FROM "constituencies" WHERE ("constituencies"."id" = 1) LIMIT 1
+Rendered constituencies/show.html.erb within layouts/application (6.7ms)
+Completed 200 OK in 34ms (Views: 13.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/constituencies" for 127.0.0.1 at Fri Jan 28 14:27:54 +0100 2011
+  Processing by ConstituenciesController#index as HTML
+  [1m[36mConstituency Load (0.6ms)[0m  [1mSELECT "constituencies".* FROM "constituencies"[0m
+Rendered constituencies/index.html.erb within layouts/application (8.1ms)
+Completed 200 OK in 38ms (Views: 14.3ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/constituencies/1" for 127.0.0.1 at Fri Jan 28 14:27:57 +0100 2011
+  Processing by ConstituenciesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mConstituency Load (0.2ms)[0m  SELECT "constituencies".* FROM "constituencies" WHERE ("constituencies"."id" = 1) LIMIT 1
+Rendered constituencies/show.html.erb within layouts/application (7.0ms)
+Completed 200 OK in 33ms (Views: 12.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/constituencies/1" for 127.0.0.1 at Fri Jan 28 14:31:50 +0100 2011
+  Processing by ConstituenciesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mConstituency Load (0.2ms)[0m  [1mSELECT "constituencies".* FROM "constituencies" WHERE ("constituencies"."id" = 1) LIMIT 1[0m
+Rendered constituencies/show.html.erb within layouts/application (7.7ms)
+Completed 200 OK in 96ms (Views: 14.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/constituencies/1" for 127.0.0.1 at Fri Jan 28 14:34:51 +0100 2011
+  Processing by ConstituenciesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mConstituency Load (0.2ms)[0m  SELECT "constituencies".* FROM "constituencies" WHERE ("constituencies"."id" = 1) LIMIT 1
+Rendered constituencies/show.html.erb within layouts/application (7.2ms)
+Completed 200 OK in 34ms (Views: 13.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/constituencies/1" for 127.0.0.1 at Fri Jan 28 14:40:36 +0100 2011
+  Processing by ConstituenciesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mConstituency Load (0.2ms)[0m  [1mSELECT "constituencies".* FROM "constituencies" WHERE ("constituencies"."id" = 1) LIMIT 1[0m
+Rendered constituencies/show.html.erb within layouts/application (9.6ms)
+Completed   in 96ms
+
+ActionView::Template::Error (uninitialized constant ConstituenciesHelper::JSON):
+    9:   <%= numberten %>
+    10: </p>
+    11: 
+    12: <img src=<%= karte %>>
+    13: 
+    14: <img src="http://maps.google.com/maps/api/staticmap?size=400x400&sensor=true&path=fillcolor:0xAA000033|color:0xFFFFFF00|enc:wlsnIy`br@{vDunLe{@_s@wp@sj@gX{Uwd@s`@g|@loFnUdwDhvJhnGlgGn~DruBrjA`pJjjCvyMj_@hmGjZzcB_~AgfJsFo_K{o@_bAmdEw`Bek@|^moCjpBy{ArdAw}EirDiqM{Fz`KmwAf{GitBz{BioB]scB@{rChy@oaCknB">
+    15: 
+  app/helpers/constituencies_helper.rb:399:in `karte'
+  app/views/constituencies/show.html.erb:12:in `_app_views_constituencies_show_html_erb___449702206__615240218_0'
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.3ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (515.1ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (562.5ms)
+
+
+Started GET "/constituencies/1" for 127.0.0.1 at Fri Jan 28 14:42:11 +0100 2011
+  Processing by ConstituenciesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mConstituency Load (0.2ms)[0m  SELECT "constituencies".* FROM "constituencies" WHERE ("constituencies"."id" = 1) LIMIT 1
+Rendered constituencies/show.html.erb within layouts/application (5.7ms)
+Completed   in 34ms
+
+ActionView::Template::Error (uninitialized constant ConstituenciesHelper::JSON):
+    9:   <%= numberten %>
+    10: </p>
+    11: 
+    12: <img src=<%= karte %>>
+    13: 
+    14: <img src="http://maps.google.com/maps/api/staticmap?size=400x400&sensor=true&path=fillcolor:0xAA000033|color:0xFFFFFF00|enc:wlsnIy`br@{vDunLe{@_s@wp@sj@gX{Uwd@s`@g|@loFnUdwDhvJhnGlgGn~DruBrjA`pJjjCvyMj_@hmGjZzcB_~AgfJsFo_K{o@_bAmdEw`Bek@|^moCjpBy{ArdAw}EirDiqM{Fz`KmwAf{GitBz{BioB]scB@{rChy@oaCknB">
+    15: 
+  app/helpers/constituencies_helper.rb:399:in `karte'
+  app/views/constituencies/show.html.erb:12:in `_app_views_constituencies_show_html_erb___449702206__616147918_0'
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.2ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (477.9ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (486.9ms)
+
+
+Started GET "/constituencies/1" for 127.0.0.1 at Fri Jan 28 14:43:01 +0100 2011
+
+LoadError (Missing helper file helpers/json.rb):
+  app/controllers/application_controller.rb:1
+  app/controllers/constituencies_controller.rb:1
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.3ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (160.2ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (166.5ms)
+
+
+Started GET "/constituencies/1" for 127.0.0.1 at Fri Jan 28 14:43:39 +0100 2011
+
+LoadError (Missing helper file helpers/json.rb):
+  app/controllers/application_controller.rb:1
+  app/controllers/constituencies_controller.rb:1
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.2ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (208.2ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (214.4ms)
+
+
+Started GET "/constituencies/1" for 127.0.0.1 at Fri Jan 28 14:43:43 +0100 2011
+
+LoadError (Missing helper file helpers/json.rb):
+  app/controllers/application_controller.rb:1
+  app/controllers/constituencies_controller.rb:1
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.1ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (217.2ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (222.9ms)
+
+
+Started GET "/constituencies/1" for 127.0.0.1 at Fri Jan 28 14:44:33 +0100 2011
+
+LoadError (Missing helper file helpers/json.rb):
+  app/controllers/application_controller.rb:1
+  app/controllers/constituencies_controller.rb:1
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.2ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (155.8ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (208.7ms)
+
+
+Started GET "/constituencies/1" for 127.0.0.1 at Fri Jan 28 14:44:35 +0100 2011
+
+LoadError (Missing helper file helpers/json.rb):
+  app/controllers/application_controller.rb:1
+  app/controllers/constituencies_controller.rb:1
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.2ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (159.4ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (166.2ms)
+
+
+Started GET "/constituencies/1" for 127.0.0.1 at Fri Jan 28 14:45:04 +0100 2011
+  Processing by ConstituenciesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mConstituency Load (0.2ms)[0m  [1mSELECT "constituencies".* FROM "constituencies" WHERE ("constituencies"."id" = 1) LIMIT 1[0m
+Rendered constituencies/show.html.erb within layouts/application (5.2ms)
+Completed   in 31ms
+
+ActionView::Template::Error (uninitialized constant ConstituenciesHelper::JSON):
+    9:   <%= numberten %>
+    10: </p>
+    11: 
+    12: <img src=<%= karte %>>
+    13: 
+    14: <img src="http://maps.google.com/maps/api/staticmap?size=400x400&sensor=true&path=fillcolor:0xAA000033|color:0xFFFFFF00|enc:wlsnIy`br@{vDunLe{@_s@wp@sj@gX{Uwd@s`@g|@loFnUdwDhvJhnGlgGn~DruBrjA`pJjjCvyMj_@hmGjZzcB_~AgfJsFo_K{o@_bAmdEw`Bek@|^moCjpBy{ArdAw}EirDiqM{Fz`KmwAf{GitBz{BioB]scB@{rChy@oaCknB">
+    15: 
+  app/helpers/constituencies_helper.rb:399:in `karte'
+  app/views/constituencies/show.html.erb:12:in `_app_views_constituencies_show_html_erb___449702206__617083478_0'
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.3ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (433.1ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (442.5ms)
+
+
+Started GET "/constituencies/1" for 127.0.0.1 at Fri Jan 28 14:45:38 +0100 2011
+  Processing by ConstituenciesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mConstituency Load (0.2ms)[0m  SELECT "constituencies".* FROM "constituencies" WHERE ("constituencies"."id" = 1) LIMIT 1
+Rendered constituencies/show.html.erb within layouts/application (6.9ms)
+Completed   in 85ms
+
+ActionView::Template::Error (no such file to load -- json):
+    9:   <%= numberten %>
+    10: </p>
+    11: 
+    12: <img src=<%= karte %>>
+    13: 
+    14: <img src="http://maps.google.com/maps/api/staticmap?size=400x400&sensor=true&path=fillcolor:0xAA000033|color:0xFFFFFF00|enc:wlsnIy`br@{vDunLe{@_s@wp@sj@gX{Uwd@s`@g|@loFnUdwDhvJhnGlgGn~DruBrjA`pJjjCvyMj_@hmGjZzcB_~AgfJsFo_K{o@_bAmdEw`Bek@|^moCjpBy{ArdAw}EirDiqM{Fz`KmwAf{GitBz{BioB]scB@{rChy@oaCknB">
+    15: 
+  app/helpers/constituencies_helper.rb:401:in `karte'
+  app/views/constituencies/show.html.erb:12:in `_app_views_constituencies_show_html_erb___449702206__614966218_0'
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.3ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (438.1ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (447.5ms)
+
+
+Started GET "/constituencies/1" for 127.0.0.1 at Fri Jan 28 14:56:03 +0100 2011
+  Processing by ConstituenciesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mConstituency Load (0.2ms)[0m  [1mSELECT "constituencies".* FROM "constituencies" WHERE ("constituencies"."id" = 1) LIMIT 1[0m
+Rendered constituencies/show.html.erb within layouts/application (7.2ms)
+Completed 200 OK in 35ms (Views: 13.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/constituencies/1" for 127.0.0.1 at Fri Jan 28 15:04:07 +0100 2011
+  Processing by ConstituenciesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mConstituency Load (0.2ms)[0m  SELECT "constituencies".* FROM "constituencies" WHERE ("constituencies"."id" = 1) LIMIT 1
+Rendered constituencies/show.html.erb within layouts/application (6.2ms)
+Completed   in 87ms
+
+ActionView::Template::Error (uninitialized constant ConstituenciesHelper::JSON):
+    7: 
+    8: 
+    9: 
+    10: <img src=<%= karte %>>
+    11: 
+    12: <p>
+    13:   <%= link_to "Edit", edit_constituency_path(@constituency) %> |
+  app/helpers/constituencies_helper.rb:399:in `karte'
+  app/views/constituencies/show.html.erb:10:in `_app_views_constituencies_show_html_erb___449702206__614918088_0'
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.2ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (441.3ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (453.8ms)
+
+
+Started GET "/constituencies/1" for 127.0.0.1 at Fri Jan 28 15:05:11 +0100 2011
+  Processing by ConstituenciesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mConstituency Load (0.2ms)[0m  [1mSELECT "constituencies".* FROM "constituencies" WHERE ("constituencies"."id" = 1) LIMIT 1[0m
+Rendered constituencies/show.html.erb within layouts/application (5.7ms)
+Completed   in 34ms
+
+ActionView::Template::Error (uninitialized constant ConstituenciesHelper::JSON):
+    7: 
+    8: 
+    9: 
+    10: <img src=<%= karte %>>
+    11: 
+    12: <p>
+    13:   <%= link_to "Edit", edit_constituency_path(@constituency) %> |
+  app/helpers/constituencies_helper.rb:399:in `karte'
+  app/views/constituencies/show.html.erb:10:in `_app_views_constituencies_show_html_erb___449702206__616166748_0'
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.2ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (440.1ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (449.0ms)
+
+
+Started GET "/constituencies/1" for 127.0.0.1 at Fri Jan 28 15:05:35 +0100 2011
+  Processing by ConstituenciesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mSQL (0.8ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mConstituency Load (0.2ms)[0m  SELECT "constituencies".* FROM "constituencies" WHERE ("constituencies"."id" = 1) LIMIT 1
+Rendered constituencies/show.html.erb within layouts/application (150.3ms)
+Completed 200 OK in 164ms (Views: 156.5ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/constituencies/1" for 127.0.0.1 at Fri Jan 28 15:07:19 +0100 2011
+  Processing by ConstituenciesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mConstituency Load (0.2ms)[0m  [1mSELECT "constituencies".* FROM "constituencies" WHERE ("constituencies"."id" = 1) LIMIT 1[0m
+Rendered constituencies/show.html.erb within layouts/application (109.5ms)
+Completed 200 OK in 136ms (Views: 115.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/constituencies" for 127.0.0.1 at Fri Jan 28 15:07:45 +0100 2011
+  Processing by ConstituenciesController#index as HTML
+  [1m[35mConstituency Load (0.5ms)[0m  SELECT "constituencies".* FROM "constituencies"
+Rendered constituencies/index.html.erb within layouts/application (7.7ms)
+Completed 200 OK in 36ms (Views: 13.8ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/constituencies/new" for 127.0.0.1 at Fri Jan 28 15:07:47 +0100 2011
+  Processing by ConstituenciesController#new as HTML
+Rendered constituencies/_form.html.erb (4.5ms)
+Rendered constituencies/new.html.erb within layouts/application (9.0ms)
+Completed 200 OK in 34ms (Views: 14.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/constituencies" for 127.0.0.1 at Fri Jan 28 15:07:52 +0100 2011
+  Processing by ConstituenciesController#create as HTML
+  Parameters: {"commit"=>"Create Constituency", "authenticity_token"=>"4KO5ytHX894tM2Pa7rKe02PhskWen+O+fIh7r+teQqQ=", "utf8"=>"✓", "constituency"=>{"number"=>"002"}}
+  [1m[36mAREL (0.7ms)[0m  [1mINSERT INTO "constituencies" ("created_at", "number", "updated_at") VALUES ('2011-01-28 14:07:52.376595', 2, '2011-01-28 14:07:52.376595')[0m
+Redirected to http://localhost:3000/constituencies/2
+Completed 302 Found in 38ms
+
+
+Started GET "/constituencies/2" for 127.0.0.1 at Fri Jan 28 15:07:52 +0100 2011
+  Processing by ConstituenciesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[35mConstituency Load (0.2ms)[0m  SELECT "constituencies".* FROM "constituencies" WHERE ("constituencies"."id" = 2) LIMIT 1
+Rendered constituencies/show.html.erb within layouts/application (160.9ms)
+Completed 200 OK in 188ms (Views: 166.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/constituencies" for 127.0.0.1 at Fri Jan 28 15:08:01 +0100 2011
+  Processing by ConstituenciesController#index as HTML
+  [1m[36mConstituency Load (0.6ms)[0m  [1mSELECT "constituencies".* FROM "constituencies"[0m
+Rendered constituencies/index.html.erb within layouts/application (9.1ms)
+Completed 200 OK in 38ms (Views: 15.2ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/constituencies/new" for 127.0.0.1 at Fri Jan 28 15:08:02 +0100 2011
+  Processing by ConstituenciesController#new as HTML
+Rendered constituencies/_form.html.erb (4.4ms)
+Rendered constituencies/new.html.erb within layouts/application (9.0ms)
+Completed 200 OK in 34ms (Views: 14.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/constituencies" for 127.0.0.1 at Fri Jan 28 15:08:07 +0100 2011
+  Processing by ConstituenciesController#create as HTML
+  Parameters: {"commit"=>"Create Constituency", "authenticity_token"=>"4KO5ytHX894tM2Pa7rKe02PhskWen+O+fIh7r+teQqQ=", "utf8"=>"✓", "constituency"=>{"number"=>"001"}}
+  [1m[35mAREL (0.6ms)[0m  INSERT INTO "constituencies" ("updated_at", "created_at", "number") VALUES ('2011-01-28 14:08:07.726223', '2011-01-28 14:08:07.726223', 1)
+Redirected to http://localhost:3000/constituencies/3
+Completed 302 Found in 32ms
+
+
+Started GET "/constituencies/3" for 127.0.0.1 at Fri Jan 28 15:08:07 +0100 2011
+  Processing by ConstituenciesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mConstituency Load (0.2ms)[0m  [1mSELECT "constituencies".* FROM "constituencies" WHERE ("constituencies"."id" = 3) LIMIT 1[0m
+Rendered constituencies/show.html.erb within layouts/application (218.3ms)
+Completed 200 OK in 245ms (Views: 224.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/constituencies" for 127.0.0.1 at Fri Jan 28 15:08:13 +0100 2011
+  Processing by ConstituenciesController#index as HTML
+  [1m[35mConstituency Load (0.7ms)[0m  SELECT "constituencies".* FROM "constituencies"
+Rendered constituencies/index.html.erb within layouts/application (11.0ms)
+Completed 200 OK in 41ms (Views: 17.3ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/constituencies/new" for 127.0.0.1 at Fri Jan 28 15:08:14 +0100 2011
+  Processing by ConstituenciesController#new as HTML
+Rendered constituencies/_form.html.erb (4.2ms)
+Rendered constituencies/new.html.erb within layouts/application (8.7ms)
+Completed 200 OK in 34ms (Views: 14.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/constituencies" for 127.0.0.1 at Fri Jan 28 15:08:18 +0100 2011
+  Processing by ConstituenciesController#create as HTML
+  Parameters: {"commit"=>"Create Constituency", "authenticity_token"=>"4KO5ytHX894tM2Pa7rKe02PhskWen+O+fIh7r+teQqQ=", "utf8"=>"✓", "constituency"=>{"number"=>"010"}}
+  [1m[36mAREL (0.6ms)[0m  [1mINSERT INTO "constituencies" ("number", "updated_at", "created_at") VALUES (10, '2011-01-28 14:08:18.756779', '2011-01-28 14:08:18.756779')[0m
+Redirected to http://localhost:3000/constituencies/4
+Completed 302 Found in 32ms
+
+
+Started GET "/constituencies/4" for 127.0.0.1 at Fri Jan 28 15:08:18 +0100 2011
+  Processing by ConstituenciesController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[35mConstituency Load (0.2ms)[0m  SELECT "constituencies".* FROM "constituencies" WHERE ("constituencies"."id" = 4) LIMIT 1
+Rendered constituencies/show.html.erb within layouts/application (153.3ms)
+Completed 200 OK in 180ms (Views: 159.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/constituencies" for 127.0.0.1 at Fri Jan 28 15:10:03 +0100 2011
+  Processing by ConstituenciesController#index as HTML
+  [1m[36mConstituency Load (0.7ms)[0m  [1mSELECT "constituencies".* FROM "constituencies"[0m
+Rendered constituencies/index.html.erb within layouts/application (11.8ms)
+Completed 200 OK in 99ms (Views: 18.1ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/constituencies/new" for 127.0.0.1 at Fri Jan 28 15:10:05 +0100 2011
+  Processing by ConstituenciesController#new as HTML
+Rendered constituencies/_form.html.erb (4.3ms)
+Rendered constituencies/new.html.erb within layouts/application (8.8ms)
+Completed 200 OK in 35ms (Views: 14.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/constituencies" for 127.0.0.1 at Fri Jan 28 15:10:09 +0100 2011
+  Processing by ConstituenciesController#create as HTML
+  Parameters: {"commit"=>"Create Constituency", "authenticity_token"=>"4KO5ytHX894tM2Pa7rKe02PhskWen+O+fIh7r+teQqQ=", "utf8"=>"✓", "constituency"=>{"number"=>"221"}}
+  [1m[35mAREL (0.7ms)[0m  INSERT INTO "constituencies" ("created_at", "updated_at", "number") VALUES ('2011-01-28 14:10:09.539958', '2011-01-28 14:10:09.539958', 221)
+Redirected to http://localhost:3000/constituencies/5
+Completed 302 Found in 89ms
+
+
+Started GET "/constituencies/5" for 127.0.0.1 at Fri Jan 28 15:10:09 +0100 2011
+  Processing by ConstituenciesController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mConstituency Load (0.2ms)[0m  [1mSELECT "constituencies".* FROM "constituencies" WHERE ("constituencies"."id" = 5) LIMIT 1[0m
+Rendered constituencies/show.html.erb within layouts/application (82.9ms)
+Completed 200 OK in 111ms (Views: 89.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/constituencies" for 127.0.0.1 at Fri Jan 28 15:12:02 +0100 2011
+  Processing by ConstituenciesController#index as HTML
+  [1m[35mConstituency Load (0.8ms)[0m  SELECT "constituencies".* FROM "constituencies"
+Rendered constituencies/index.html.erb within layouts/application (13.7ms)
+Completed 200 OK in 101ms (Views: 20.2ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/constituencies/new" for 127.0.0.1 at Fri Jan 28 15:12:03 +0100 2011
+  Processing by ConstituenciesController#new as HTML
+Rendered constituencies/_form.html.erb (4.3ms)
+Rendered constituencies/new.html.erb within layouts/application (9.0ms)
+Completed 200 OK in 35ms (Views: 15.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/constituencies" for 127.0.0.1 at Fri Jan 28 15:12:08 +0100 2011
+  Processing by ConstituenciesController#create as HTML
+  Parameters: {"commit"=>"Create Constituency", "authenticity_token"=>"4KO5ytHX894tM2Pa7rKe02PhskWen+O+fIh7r+teQqQ=", "utf8"=>"✓", "constituency"=>{"number"=>"300"}}
+  [1m[36mAREL (0.6ms)[0m  [1mINSERT INTO "constituencies" ("created_at", "number", "updated_at") VALUES ('2011-01-28 14:12:08.326103', 300, '2011-01-28 14:12:08.326103')[0m
+Redirected to http://localhost:3000/constituencies/6
+Completed 302 Found in 88ms
+
+
+Started GET "/constituencies/6" for 127.0.0.1 at Fri Jan 28 15:12:08 +0100 2011
+  Processing by ConstituenciesController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[35mConstituency Load (0.2ms)[0m  SELECT "constituencies".* FROM "constituencies" WHERE ("constituencies"."id" = 6) LIMIT 1
+Rendered constituencies/show.html.erb within layouts/application (245.4ms)
+Completed 200 OK in 274ms (Views: 251.5ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/constituencies" for 127.0.0.1 at Fri Jan 28 15:12:16 +0100 2011
+  Processing by ConstituenciesController#create as HTML
+  Parameters: {"commit"=>"Create Constituency", "authenticity_token"=>"4KO5ytHX894tM2Pa7rKe02PhskWen+O+fIh7r+teQqQ=", "utf8"=>"✓", "constituency"=>{"number"=>"250"}}
+  [1m[36mAREL (0.7ms)[0m  [1mINSERT INTO "constituencies" ("created_at", "updated_at", "number") VALUES ('2011-01-28 14:12:16.792322', '2011-01-28 14:12:16.792322', 250)[0m
+Redirected to http://localhost:3000/constituencies/7
+Completed 302 Found in 86ms
+
+
+Started GET "/constituencies/7" for 127.0.0.1 at Fri Jan 28 15:12:16 +0100 2011
+  Processing by ConstituenciesController#show as HTML
+  Parameters: {"id"=>"7"}
+  [1m[35mConstituency Load (0.2ms)[0m  SELECT "constituencies".* FROM "constituencies" WHERE ("constituencies"."id" = 7) LIMIT 1
+Rendered constituencies/show.html.erb within layouts/application (162.2ms)
+Completed 200 OK in 191ms (Views: 168.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/constituencies" for 127.0.0.1 at Fri Jan 28 15:12:34 +0100 2011
+  Processing by ConstituenciesController#index as HTML
+  [1m[36mConstituency Load (0.9ms)[0m  [1mSELECT "constituencies".* FROM "constituencies"[0m
+Rendered constituencies/index.html.erb within layouts/application (16.5ms)
+Completed 200 OK in 100ms (Views: 23.0ms | ActiveRecord: 0.9ms)
+
+
+Started POST "/constituencies/6" for 127.0.0.1 at Fri Jan 28 15:12:38 +0100 2011
+  Processing by ConstituenciesController#destroy as HTML
+  Parameters: {"authenticity_token"=>"4KO5ytHX894tM2Pa7rKe02PhskWen+O+fIh7r+teQqQ=", "id"=>"6"}
+  [1m[35mConstituency Load (0.2ms)[0m  SELECT "constituencies".* FROM "constituencies" WHERE ("constituencies"."id" = 6) LIMIT 1
+  [1m[36mAREL (0.5ms)[0m  [1mDELETE FROM "constituencies" WHERE ("constituencies"."id" = 6)[0m
+Redirected to http://localhost:3000/constituencies
+Completed 302 Found in 30ms
+
+
+Started GET "/constituencies" for 127.0.0.1 at Fri Jan 28 15:12:38 +0100 2011
+  Processing by ConstituenciesController#index as HTML
+  [1m[35mConstituency Load (0.8ms)[0m  SELECT "constituencies".* FROM "constituencies"
+Rendered constituencies/index.html.erb within layouts/application (73.8ms)
+Completed 200 OK in 100ms (Views: 79.7ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/constituencies/new" for 127.0.0.1 at Fri Jan 28 15:12:41 +0100 2011
+  Processing by ConstituenciesController#new as HTML
+Rendered constituencies/_form.html.erb (4.3ms)
+Rendered constituencies/new.html.erb within layouts/application (9.0ms)
+Completed 200 OK in 36ms (Views: 15.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/constituencies" for 127.0.0.1 at Fri Jan 28 15:12:45 +0100 2011
+  Processing by ConstituenciesController#create as HTML
+  Parameters: {"commit"=>"Create Constituency", "authenticity_token"=>"4KO5ytHX894tM2Pa7rKe02PhskWen+O+fIh7r+teQqQ=", "utf8"=>"✓", "constituency"=>{"number"=>"7"}}
+  [1m[36mAREL (0.6ms)[0m  [1mINSERT INTO "constituencies" ("created_at", "updated_at", "number") VALUES ('2011-01-28 14:12:45.731486', '2011-01-28 14:12:45.731486', 7)[0m
+Redirected to http://localhost:3000/constituencies/8
+Completed 302 Found in 27ms
+
+
+Started GET "/constituencies/8" for 127.0.0.1 at Fri Jan 28 15:12:45 +0100 2011
+  Processing by ConstituenciesController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[35mConstituency Load (0.2ms)[0m  SELECT "constituencies".* FROM "constituencies" WHERE ("constituencies"."id" = 8) LIMIT 1
+Rendered constituencies/show.html.erb within layouts/application (147.7ms)
+Completed 200 OK in 177ms (Views: 154.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/constituencies" for 127.0.0.1 at Fri Jan 28 15:12:57 +0100 2011
+  Processing by ConstituenciesController#index as HTML
+  [1m[36mConstituency Load (0.8ms)[0m  [1mSELECT "constituencies".* FROM "constituencies"[0m
+Rendered constituencies/index.html.erb within layouts/application (71.2ms)
+Completed 200 OK in 97ms (Views: 77.1ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/constituencies/new" for 127.0.0.1 at Fri Jan 28 15:12:59 +0100 2011
+  Processing by ConstituenciesController#new as HTML
+Rendered constituencies/_form.html.erb (4.6ms)
+Rendered constituencies/new.html.erb within layouts/application (9.3ms)
+Completed 200 OK in 37ms (Views: 15.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/constituencies" for 127.0.0.1 at Fri Jan 28 15:13:02 +0100 2011
+  Processing by ConstituenciesController#create as HTML
+  Parameters: {"commit"=>"Create Constituency", "authenticity_token"=>"4KO5ytHX894tM2Pa7rKe02PhskWen+O+fIh7r+teQqQ=", "utf8"=>"✓", "constituency"=>{"number"=>"8"}}
+  [1m[35mAREL (0.6ms)[0m  INSERT INTO "constituencies" ("updated_at", "number", "created_at") VALUES ('2011-01-28 14:13:02.311710', 8, '2011-01-28 14:13:02.311710')
+Redirected to http://localhost:3000/constituencies/9
+Completed 302 Found in 28ms
+
+
+Started GET "/constituencies/9" for 127.0.0.1 at Fri Jan 28 15:13:02 +0100 2011
+  Processing by ConstituenciesController#show as HTML
+  Parameters: {"id"=>"9"}
+  [1m[36mConstituency Load (0.2ms)[0m  [1mSELECT "constituencies".* FROM "constituencies" WHERE ("constituencies"."id" = 9) LIMIT 1[0m
+Rendered constituencies/show.html.erb within layouts/application (142.1ms)
+Completed 200 OK in 172ms (Views: 148.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/constituencies" for 127.0.0.1 at Fri Jan 28 15:13:09 +0100 2011
+  Processing by ConstituenciesController#index as HTML
+  [1m[35mConstituency Load (0.9ms)[0m  SELECT "constituencies".* FROM "constituencies"
+Rendered constituencies/index.html.erb within layouts/application (15.3ms)
+Completed 200 OK in 41ms (Views: 21.1ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/constituencies/new" for 127.0.0.1 at Fri Jan 28 15:13:13 +0100 2011
+  Processing by ConstituenciesController#new as HTML
+Rendered constituencies/_form.html.erb (4.6ms)
+Rendered constituencies/new.html.erb within layouts/application (9.4ms)
+Completed 200 OK in 38ms (Views: 15.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/constituencies" for 127.0.0.1 at Fri Jan 28 15:13:18 +0100 2011
+  Processing by ConstituenciesController#create as HTML
+  Parameters: {"commit"=>"Create Constituency", "authenticity_token"=>"4KO5ytHX894tM2Pa7rKe02PhskWen+O+fIh7r+teQqQ=", "utf8"=>"✓", "constituency"=>{"number"=>"008"}}
+  [1m[36mAREL (0.6ms)[0m  [1mINSERT INTO "constituencies" ("created_at", "updated_at", "number") VALUES ('2011-01-28 14:13:18.164907', '2011-01-28 14:13:18.164907', 8)[0m
+Redirected to http://localhost:3000/constituencies/10
+Completed 302 Found in 28ms
+
+
+Started GET "/constituencies/10" for 127.0.0.1 at Fri Jan 28 15:13:18 +0100 2011
+  Processing by ConstituenciesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[35mConstituency Load (0.2ms)[0m  SELECT "constituencies".* FROM "constituencies" WHERE ("constituencies"."id" = 10) LIMIT 1
+Rendered constituencies/show.html.erb within layouts/application (181.7ms)
+Completed 200 OK in 211ms (Views: 188.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/constituencies" for 127.0.0.1 at Fri Jan 28 15:13:23 +0100 2011
+  Processing by ConstituenciesController#index as HTML
+  [1m[36mConstituency Load (0.9ms)[0m  [1mSELECT "constituencies".* FROM "constituencies"[0m
+Rendered constituencies/index.html.erb within layouts/application (16.5ms)
+Completed 200 OK in 43ms (Views: 22.3ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/constituencies/new" for 127.0.0.1 at Fri Jan 28 15:13:25 +0100 2011
+  Processing by ConstituenciesController#new as HTML
+Rendered constituencies/_form.html.erb (4.5ms)
+Rendered constituencies/new.html.erb within layouts/application (9.2ms)
+Completed 200 OK in 39ms (Views: 15.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/constituencies" for 127.0.0.1 at Fri Jan 28 15:13:29 +0100 2011
+  Processing by ConstituenciesController#create as HTML
+  Parameters: {"commit"=>"Create Constituency", "authenticity_token"=>"4KO5ytHX894tM2Pa7rKe02PhskWen+O+fIh7r+teQqQ=", "utf8"=>"✓", "constituency"=>{"number"=>"110"}}
+  [1m[35mAREL (0.6ms)[0m  INSERT INTO "constituencies" ("number", "created_at", "updated_at") VALUES (110, '2011-01-28 14:13:29.145349', '2011-01-28 14:13:29.145349')
+Redirected to http://localhost:3000/constituencies/11
+Completed 302 Found in 28ms
+
+
+Started GET "/constituencies/11" for 127.0.0.1 at Fri Jan 28 15:13:29 +0100 2011
+  Processing by ConstituenciesController#show as HTML
+  Parameters: {"id"=>"11"}
+  [1m[36mConstituency Load (0.2ms)[0m  [1mSELECT "constituencies".* FROM "constituencies" WHERE ("constituencies"."id" = 11) LIMIT 1[0m
+Rendered constituencies/show.html.erb within layouts/application (126.9ms)
+Completed 200 OK in 157ms (Views: 133.2ms | ActiveRecord: 0.2ms)
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.1ms)[0m  select sqlite_version(*)
+  [1m[36mSQL (2.9ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_list("schema_migrations")
+  [1m[36mSQL (1.8ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mSQL (0.1ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.1ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.1ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations"
+Migrating to CreateComments (20110114233014)
+  [1m[36mSQL (0.6ms)[0m  [1mCREATE TABLE "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "body" text, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20110114233014')
+Migrating to DeviseCreateUsers (20110114233300)
+  [1m[36mSQL (0.7ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar(255) DEFAULT '' NOT NULL, "encrypted_password" varchar(128) DEFAULT '' NOT NULL, "password_salt" varchar(255) DEFAULT '' NOT NULL, "reset_password_token" varchar(255), "remember_token" varchar(255), "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar(255), "last_sign_in_ip" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("users")
+  [1m[36mSQL (0.2ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_list("users")
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_info('index_users_on_email')[0m
+  [1m[35mSQL (0.2ms)[0m  CREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20110114233300')[0m
+Migrating to CreateRoles (20110115000846)
+  [1m[35mSQL (0.8ms)[0m  CREATE TABLE "roles" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20110115000846')[0m
+Migrating to CreateAssignments (20110115001431)
+  [1m[35mSQL (0.9ms)[0m  CREATE TABLE "assignments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "role_id" integer, "user_id" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20110115001431')[0m
+Migrating to AddCommentToUser (20110115122442)
+  [1m[35mSQL (0.9ms)[0m  ALTER TABLE "comments" ADD "user_id" integer
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20110115122442')[0m
+Migrating to CreateAuthentications (20110115124214)
+  [1m[35mSQL (0.8ms)[0m  CREATE TABLE "authentications" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "provider" varchar(255), "uid" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20110115124214')[0m
+Migrating to AddUsernameToUser (20110125220433)
+  [1m[35mSQL (0.9ms)[0m  ALTER TABLE "users" ADD "user_name" varchar(255)
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20110125220433')[0m
+Migrating to CreateConstituencies (20110128132614)
+  [1m[35mSQL (0.7ms)[0m  CREATE TABLE "constituencies" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "number" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20110128132614')[0m
+  [1m[35mSQL (0.4ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations"[0m
+  [1m[35mSQL (0.3ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_list("assignments")[0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_list("authentications")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("comments")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("constituencies")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("roles")[0m
+  [1m[35mSQL (0.2ms)[0m  PRAGMA index_list("users")
+  [1m[36mSQL (0.1ms)[0m  [1mPRAGMA index_info('index_users_on_reset_password_token')[0m
+  [1m[35mSQL (0.1ms)[0m  PRAGMA index_info('index_users_on_email')
+
+
+Started GET "/constituencies/11" for 127.0.0.1 at Fri Jan 28 15:25:06 +0100 2011
+  Processing by ConstituenciesController#show as HTML
+  Parameters: {"id"=>"11"}
+  [1m[35mConstituency Load (0.1ms)[0m  SELECT "constituencies".* FROM "constituencies" WHERE ("constituencies"."id" = 11) LIMIT 1
+Completed   in 21ms
+
+ActiveRecord::RecordNotFound (Couldn't find Constituency with ID=11):
+  app/controllers/constituencies_controller.rb:7:in `show'
+
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.1ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (581.6ms)
+Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (590.9ms)
+
+
+Started GET "/" for 127.0.0.1 at Fri Jan 28 15:25:11 +0100 2011
+  Processing by CommentsController#index as HTML
+  [1m[36mComment Load (0.5ms)[0m  [1mSELECT "comments".* FROM "comments"[0m
+Rendered comments/index.html.erb within layouts/application (4.2ms)
+Completed 200 OK in 39ms (Views: 11.2ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/constituencies" for 127.0.0.1 at Fri Jan 28 15:25:15 +0100 2011
+  Processing by ConstituenciesController#index as HTML
+  [1m[35mConstituency Load (0.4ms)[0m  SELECT "constituencies".* FROM "constituencies"
+Rendered constituencies/index.html.erb within layouts/application (3.6ms)
+Completed 200 OK in 30ms (Views: 9.9ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/constituencies/new" for 127.0.0.1 at Fri Jan 28 15:25:17 +0100 2011
+  Processing by ConstituenciesController#new as HTML
+Rendered constituencies/_form.html.erb (4.9ms)
+Rendered constituencies/new.html.erb within layouts/application (10.0ms)
+Completed 200 OK in 97ms (Views: 16.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/constituencies" for 127.0.0.1 at Fri Jan 28 15:25:21 +0100 2011
+  Processing by ConstituenciesController#create as HTML
+  Parameters: {"commit"=>"Create Constituency", "authenticity_token"=>"4KO5ytHX894tM2Pa7rKe02PhskWen+O+fIh7r+teQqQ=", "utf8"=>"✓", "constituency"=>{"number"=>"222"}}
+  [1m[36mAREL (0.6ms)[0m  [1mINSERT INTO "constituencies" ("number", "created_at", "updated_at") VALUES ('222', '2011-01-28 14:25:21.182136', '2011-01-28 14:25:21.182136')[0m
+Redirected to http://localhost:3000/constituencies/1
+Completed 302 Found in 29ms
+
+
+Started GET "/constituencies/1" for 127.0.0.1 at Fri Jan 28 15:25:21 +0100 2011
+  Processing by ConstituenciesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mConstituency Load (0.2ms)[0m  SELECT "constituencies".* FROM "constituencies" WHERE ("constituencies"."id" = 1) LIMIT 1
+Rendered constituencies/show.html.erb within layouts/application (166.5ms)
+Completed 200 OK in 194ms (Views: 172.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/constituencies" for 127.0.0.1 at Fri Jan 28 15:25:27 +0100 2011
+  Processing by ConstituenciesController#index as HTML
+  [1m[36mConstituency Load (0.5ms)[0m  [1mSELECT "constituencies".* FROM "constituencies"[0m
+Rendered constituencies/index.html.erb within layouts/application (7.7ms)
+Completed 200 OK in 35ms (Views: 13.9ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/constituencies/new" for 127.0.0.1 at Fri Jan 28 15:25:30 +0100 2011
+  Processing by ConstituenciesController#new as HTML
+Rendered constituencies/_form.html.erb (4.2ms)
+Rendered constituencies/new.html.erb within layouts/application (8.6ms)
+Completed 200 OK in 34ms (Views: 14.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/constituencies" for 127.0.0.1 at Fri Jan 28 15:25:35 +0100 2011
+  Processing by ConstituenciesController#create as HTML
+  Parameters: {"commit"=>"Create Constituency", "authenticity_token"=>"4KO5ytHX894tM2Pa7rKe02PhskWen+O+fIh7r+teQqQ=", "utf8"=>"✓", "constituency"=>{"number"=>"002"}}
+  [1m[35mAREL (0.6ms)[0m  INSERT INTO "constituencies" ("number", "created_at", "updated_at") VALUES ('002', '2011-01-28 14:25:36.062997', '2011-01-28 14:25:36.062997')
+Redirected to http://localhost:3000/constituencies/2
+Completed 302 Found in 31ms
+
+
+Started GET "/constituencies/2" for 127.0.0.1 at Fri Jan 28 15:25:36 +0100 2011
+  Processing by ConstituenciesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mConstituency Load (0.2ms)[0m  [1mSELECT "constituencies".* FROM "constituencies" WHERE ("constituencies"."id" = 2) LIMIT 1[0m
+Rendered constituencies/show.html.erb within layouts/application (112.2ms)
+Completed 200 OK in 140ms (Views: 118.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/constituencies" for 127.0.0.1 at Fri Jan 28 15:25:41 +0100 2011
+  Processing by ConstituenciesController#index as HTML
+  [1m[35mConstituency Load (0.6ms)[0m  SELECT "constituencies".* FROM "constituencies"
+Rendered constituencies/index.html.erb within layouts/application (9.4ms)
+Completed 200 OK in 40ms (Views: 15.9ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/constituencies/new" for 127.0.0.1 at Fri Jan 28 15:25:43 +0100 2011
+  Processing by ConstituenciesController#new as HTML
+Rendered constituencies/_form.html.erb (4.3ms)
+Rendered constituencies/new.html.erb within layouts/application (8.7ms)
+Completed 200 OK in 34ms (Views: 14.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/constituencies" for 127.0.0.1 at Fri Jan 28 15:25:47 +0100 2011
+  Processing by ConstituenciesController#create as HTML
+  Parameters: {"commit"=>"Create Constituency", "authenticity_token"=>"4KO5ytHX894tM2Pa7rKe02PhskWen+O+fIh7r+teQqQ=", "utf8"=>"✓", "constituency"=>{"number"=>"008"}}
+  [1m[36mAREL (0.7ms)[0m  [1mINSERT INTO "constituencies" ("number", "updated_at", "created_at") VALUES ('008', '2011-01-28 14:25:47.648653', '2011-01-28 14:25:47.648653')[0m
+Redirected to http://localhost:3000/constituencies/3
+Completed 302 Found in 90ms
+
+
+Started GET "/constituencies/3" for 127.0.0.1 at Fri Jan 28 15:25:47 +0100 2011
+  Processing by ConstituenciesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[35mConstituency Load (0.2ms)[0m  SELECT "constituencies".* FROM "constituencies" WHERE ("constituencies"."id" = 3) LIMIT 1
+Rendered constituencies/show.html.erb within layouts/application (144.0ms)
+Completed 200 OK in 172ms (Views: 149.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/constituencies" for 127.0.0.1 at Fri Jan 28 15:25:52 +0100 2011
+  Processing by ConstituenciesController#index as HTML
+  [1m[36mConstituency Load (0.6ms)[0m  [1mSELECT "constituencies".* FROM "constituencies"[0m
+Rendered constituencies/index.html.erb within layouts/application (9.6ms)
+Completed 200 OK in 35ms (Views: 15.7ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/constituencies/new" for 127.0.0.1 at Fri Jan 28 15:25:54 +0100 2011
+  Processing by ConstituenciesController#new as HTML
+Rendered constituencies/_form.html.erb (4.6ms)
+Rendered constituencies/new.html.erb within layouts/application (9.4ms)
+Completed 200 OK in 38ms (Views: 15.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/constituencies" for 127.0.0.1 at Fri Jan 28 15:26:00 +0100 2011
+  Processing by ConstituenciesController#create as HTML
+  Parameters: {"commit"=>"Create Constituency", "authenticity_token"=>"4KO5ytHX894tM2Pa7rKe02PhskWen+O+fIh7r+teQqQ=", "utf8"=>"✓", "constituency"=>{"number"=>"219"}}
+  [1m[35mAREL (0.6ms)[0m  INSERT INTO "constituencies" ("created_at", "updated_at", "number") VALUES ('2011-01-28 14:26:00.140714', '2011-01-28 14:26:00.140714', '219')
+Redirected to http://localhost:3000/constituencies/4
+Completed 302 Found in 29ms
+
+
+Started GET "/constituencies/4" for 127.0.0.1 at Fri Jan 28 15:26:00 +0100 2011
+  Processing by ConstituenciesController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mConstituency Load (0.2ms)[0m  [1mSELECT "constituencies".* FROM "constituencies" WHERE ("constituencies"."id" = 4) LIMIT 1[0m
+Rendered constituencies/show.html.erb within layouts/application (96.9ms)
+Completed 200 OK in 188ms (Views: 104.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/constituencies/4" for 127.0.0.1 at Fri Jan 28 15:30:19 +0100 2011
+  Processing by ConstituenciesController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[35mConstituency Load (0.2ms)[0m  SELECT "constituencies".* FROM "constituencies" WHERE ("constituencies"."id" = 4) LIMIT 1
+Rendered constituencies/show.html.erb within layouts/application (135.6ms)
+Completed 200 OK in 163ms (Views: 141.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/constituencies/4" for 127.0.0.1 at Fri Jan 28 15:32:15 +0100 2011
+  Processing by ConstituenciesController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mConstituency Load (0.2ms)[0m  [1mSELECT "constituencies".* FROM "constituencies" WHERE ("constituencies"."id" = 4) LIMIT 1[0m
+Rendered constituencies/show.html.erb within layouts/application (96.8ms)
+Completed 200 OK in 185ms (Views: 103.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/constituencies" for 127.0.0.1 at Fri Jan 28 15:32:24 +0100 2011
+  Processing by ConstituenciesController#index as HTML
+  [1m[35mConstituency Load (0.7ms)[0m  SELECT "constituencies".* FROM "constituencies"
+Rendered constituencies/index.html.erb within layouts/application (11.0ms)
+Completed 200 OK in 38ms (Views: 17.3ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/constituencies/1" for 127.0.0.1 at Fri Jan 28 15:32:26 +0100 2011
+  Processing by ConstituenciesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mConstituency Load (0.2ms)[0m  [1mSELECT "constituencies".* FROM "constituencies" WHERE ("constituencies"."id" = 1) LIMIT 1[0m
+Rendered constituencies/show.html.erb within layouts/application (220.4ms)
+Completed 200 OK in 246ms (Views: 226.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/constituencies" for 127.0.0.1 at Fri Jan 28 15:32:31 +0100 2011
+  Processing by ConstituenciesController#index as HTML
+  [1m[35mConstituency Load (0.7ms)[0m  SELECT "constituencies".* FROM "constituencies"
+Rendered constituencies/index.html.erb within layouts/application (11.1ms)
+Completed 200 OK in 39ms (Views: 17.3ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/constituencies/2" for 127.0.0.1 at Fri Jan 28 15:32:33 +0100 2011
+  Processing by ConstituenciesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mConstituency Load (0.2ms)[0m  [1mSELECT "constituencies".* FROM "constituencies" WHERE ("constituencies"."id" = 2) LIMIT 1[0m
+Rendered constituencies/show.html.erb within layouts/application (152.0ms)
+Completed 200 OK in 178ms (Views: 158.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/constituencies" for 127.0.0.1 at Fri Jan 28 15:32:36 +0100 2011
+  Processing by ConstituenciesController#index as HTML
+  [1m[35mConstituency Load (0.7ms)[0m  SELECT "constituencies".* FROM "constituencies"
+Rendered constituencies/index.html.erb within layouts/application (12.0ms)
+Completed 200 OK in 42ms (Views: 18.2ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/constituencies/3" for 127.0.0.1 at Fri Jan 28 15:32:38 +0100 2011
+  Processing by ConstituenciesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mConstituency Load (0.2ms)[0m  [1mSELECT "constituencies".* FROM "constituencies" WHERE ("constituencies"."id" = 3) LIMIT 1[0m
+Rendered constituencies/show.html.erb within layouts/application (101.1ms)
+Completed 200 OK in 128ms (Views: 107.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/constituencies" for 127.0.0.1 at Fri Jan 28 15:32:43 +0100 2011
+  Processing by ConstituenciesController#index as HTML
+  [1m[35mConstituency Load (0.7ms)[0m  SELECT "constituencies".* FROM "constituencies"
+Rendered constituencies/index.html.erb within layouts/application (12.0ms)
+Completed 200 OK in 43ms (Views: 18.2ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/constituencies/new" for 127.0.0.1 at Fri Jan 28 15:32:46 +0100 2011
+  Processing by ConstituenciesController#new as HTML
+Rendered constituencies/_form.html.erb (4.2ms)
+Rendered constituencies/new.html.erb within layouts/application (8.8ms)
+Completed 200 OK in 35ms (Views: 14.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/constituencies" for 127.0.0.1 at Fri Jan 28 15:32:50 +0100 2011
+  Processing by ConstituenciesController#create as HTML
+  Parameters: {"commit"=>"Create Constituency", "authenticity_token"=>"4KO5ytHX894tM2Pa7rKe02PhskWen+O+fIh7r+teQqQ=", "utf8"=>"✓", "constituency"=>{"number"=>"001"}}
+  [1m[36mAREL (0.6ms)[0m  [1mINSERT INTO "constituencies" ("number", "updated_at", "created_at") VALUES ('001', '2011-01-28 14:32:50.772150', '2011-01-28 14:32:50.772150')[0m
+Redirected to http://localhost:3000/constituencies/5
+Completed 302 Found in 91ms
+
+
+Started GET "/constituencies/5" for 127.0.0.1 at Fri Jan 28 15:32:50 +0100 2011
+  Processing by ConstituenciesController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[35mConstituency Load (0.2ms)[0m  SELECT "constituencies".* FROM "constituencies" WHERE ("constituencies"."id" = 5) LIMIT 1
+Rendered constituencies/show.html.erb within layouts/application (138.8ms)
+Completed 200 OK in 168ms (Views: 145.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/constituencies" for 127.0.0.1 at Fri Jan 28 15:32:55 +0100 2011
+  Processing by ConstituenciesController#index as HTML
+  [1m[36mConstituency Load (0.7ms)[0m  [1mSELECT "constituencies".* FROM "constituencies"[0m
+Rendered constituencies/index.html.erb within layouts/application (11.9ms)
+Completed 200 OK in 38ms (Views: 18.0ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/constituencies/new" for 127.0.0.1 at Fri Jan 28 15:33:08 +0100 2011
+  Processing by ConstituenciesController#new as HTML
+Rendered constituencies/_form.html.erb (4.4ms)
+Rendered constituencies/new.html.erb within layouts/application (9.2ms)
+Completed 200 OK in 38ms (Views: 15.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/constituencies" for 127.0.0.1 at Fri Jan 28 15:33:11 +0100 2011
+  Processing by ConstituenciesController#create as HTML
+  Parameters: {"commit"=>"Create Constituency", "authenticity_token"=>"4KO5ytHX894tM2Pa7rKe02PhskWen+O+fIh7r+teQqQ=", "utf8"=>"✓", "constituency"=>{"number"=>"200"}}
+  [1m[35mAREL (0.6ms)[0m  INSERT INTO "constituencies" ("created_at", "number", "updated_at") VALUES ('2011-01-28 14:33:11.965179', '200', '2011-01-28 14:33:11.965179')
+Redirected to http://localhost:3000/constituencies/6
+Completed 302 Found in 28ms
+
+
+Started GET "/constituencies/6" for 127.0.0.1 at Fri Jan 28 15:33:11 +0100 2011
+  Processing by ConstituenciesController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mConstituency Load (0.2ms)[0m  [1mSELECT "constituencies".* FROM "constituencies" WHERE ("constituencies"."id" = 6) LIMIT 1[0m
+Rendered constituencies/show.html.erb within layouts/application (106.9ms)
+Completed 200 OK in 199ms (Views: 113.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/constituencies" for 127.0.0.1 at Fri Jan 28 15:33:29 +0100 2011
+  Processing by ConstituenciesController#index as HTML
+  [1m[35mConstituency Load (0.8ms)[0m  SELECT "constituencies".* FROM "constituencies"
+Rendered constituencies/index.html.erb within layouts/application (13.3ms)
+Completed 200 OK in 40ms (Views: 19.3ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/constituencies/new" for 127.0.0.1 at Fri Jan 28 15:33:32 +0100 2011
+  Processing by ConstituenciesController#new as HTML
+Rendered constituencies/_form.html.erb (5.0ms)
+Rendered constituencies/new.html.erb within layouts/application (10.2ms)
+Completed 200 OK in 99ms (Views: 16.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/constituencies" for 127.0.0.1 at Fri Jan 28 15:33:36 +0100 2011
+  Processing by ConstituenciesController#create as HTML
+  Parameters: {"commit"=>"Create Constituency", "authenticity_token"=>"4KO5ytHX894tM2Pa7rKe02PhskWen+O+fIh7r+teQqQ=", "utf8"=>"✓", "constituency"=>{"number"=>"201"}}
+  [1m[36mAREL (0.6ms)[0m  [1mINSERT INTO "constituencies" ("created_at", "updated_at", "number") VALUES ('2011-01-28 14:33:36.690241', '2011-01-28 14:33:36.690241', '201')[0m
+Redirected to http://localhost:3000/constituencies/7
+Completed 302 Found in 29ms
+
+
+Started GET "/constituencies/7" for 127.0.0.1 at Fri Jan 28 15:33:36 +0100 2011
+  Processing by ConstituenciesController#show as HTML
+  Parameters: {"id"=>"7"}
+  [1m[35mConstituency Load (0.2ms)[0m  SELECT "constituencies".* FROM "constituencies" WHERE ("constituencies"."id" = 7) LIMIT 1
+Rendered constituencies/show.html.erb within layouts/application (189.5ms)
+Completed 200 OK in 220ms (Views: 195.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/constituencies" for 127.0.0.1 at Fri Jan 28 15:33:42 +0100 2011
+  Processing by ConstituenciesController#index as HTML
+  [1m[36mConstituency Load (0.8ms)[0m  [1mSELECT "constituencies".* FROM "constituencies"[0m
+Rendered constituencies/index.html.erb within layouts/application (14.6ms)
+Completed 200 OK in 43ms (Views: 20.9ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/constituencies/new" for 127.0.0.1 at Fri Jan 28 15:33:46 +0100 2011
+  Processing by ConstituenciesController#new as HTML
+Rendered constituencies/_form.html.erb (4.4ms)
+Rendered constituencies/new.html.erb within layouts/application (9.1ms)
+Completed 200 OK in 34ms (Views: 14.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/constituencies" for 127.0.0.1 at Fri Jan 28 15:33:49 +0100 2011
+  Processing by ConstituenciesController#create as HTML
+  Parameters: {"commit"=>"Create Constituency", "authenticity_token"=>"4KO5ytHX894tM2Pa7rKe02PhskWen+O+fIh7r+teQqQ=", "utf8"=>"✓", "constituency"=>{"number"=>"199"}}
+  [1m[35mAREL (0.7ms)[0m  INSERT INTO "constituencies" ("updated_at", "created_at", "number") VALUES ('2011-01-28 14:33:49.676211', '2011-01-28 14:33:49.676211', '199')
+Redirected to http://localhost:3000/constituencies/8
+Completed 302 Found in 32ms
+
+
+Started GET "/constituencies/8" for 127.0.0.1 at Fri Jan 28 15:33:49 +0100 2011
+  Processing by ConstituenciesController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mConstituency Load (0.2ms)[0m  [1mSELECT "constituencies".* FROM "constituencies" WHERE ("constituencies"."id" = 8) LIMIT 1[0m
+Rendered constituencies/show.html.erb within layouts/application (781.8ms)
+Completed 200 OK in 810ms (Views: 787.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/constituencies" for 127.0.0.1 at Fri Jan 28 15:33:56 +0100 2011
+  Processing by ConstituenciesController#index as HTML
+  [1m[35mConstituency Load (0.9ms)[0m  SELECT "constituencies".* FROM "constituencies"
+Rendered constituencies/index.html.erb within layouts/application (16.7ms)
+Completed 200 OK in 107ms (Views: 23.3ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/constituencies/8" for 127.0.0.1 at Fri Jan 28 15:34:00 +0100 2011
+  Processing by ConstituenciesController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mConstituency Load (0.2ms)[0m  [1mSELECT "constituencies".* FROM "constituencies" WHERE ("constituencies"."id" = 8) LIMIT 1[0m
+Rendered constituencies/show.html.erb within layouts/application (157.7ms)
+Completed 200 OK in 185ms (Views: 163.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/constituencies" for 127.0.0.1 at Fri Jan 28 15:34:07 +0100 2011
+  Processing by ConstituenciesController#index as HTML
+  [1m[35mConstituency Load (1.0ms)[0m  SELECT "constituencies".* FROM "constituencies"
+Rendered constituencies/index.html.erb within layouts/application (17.7ms)
+Completed 200 OK in 107ms (Views: 24.3ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/constituencies/new" for 127.0.0.1 at Fri Jan 28 15:34:09 +0100 2011
+  Processing by ConstituenciesController#new as HTML
+Rendered constituencies/_form.html.erb (4.5ms)
+Rendered constituencies/new.html.erb within layouts/application (9.3ms)
+Completed 200 OK in 36ms (Views: 15.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/constituencies" for 127.0.0.1 at Fri Jan 28 15:34:13 +0100 2011
+  Processing by ConstituenciesController#create as HTML
+  Parameters: {"commit"=>"Create Constituency", "authenticity_token"=>"4KO5ytHX894tM2Pa7rKe02PhskWen+O+fIh7r+teQqQ=", "utf8"=>"✓", "constituency"=>{"number"=>"010"}}
+  [1m[36mAREL (0.6ms)[0m  [1mINSERT INTO "constituencies" ("updated_at", "created_at", "number") VALUES ('2011-01-28 14:34:13.641096', '2011-01-28 14:34:13.641096', '010')[0m
+Redirected to http://localhost:3000/constituencies/9
+Completed 302 Found in 30ms
+
+
+Started GET "/constituencies/9" for 127.0.0.1 at Fri Jan 28 15:34:13 +0100 2011
+  Processing by ConstituenciesController#show as HTML
+  Parameters: {"id"=>"9"}
+  [1m[35mConstituency Load (0.2ms)[0m  SELECT "constituencies".* FROM "constituencies" WHERE ("constituencies"."id" = 9) LIMIT 1
+Rendered constituencies/show.html.erb within layouts/application (154.7ms)
+Completed 200 OK in 184ms (Views: 160.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/constituencies" for 127.0.0.1 at Fri Jan 28 15:34:58 +0100 2011
+  Processing by ConstituenciesController#index as HTML
+  [1m[36mConstituency Load (0.9ms)[0m  [1mSELECT "constituencies".* FROM "constituencies"[0m
+Rendered constituencies/index.html.erb within layouts/application (16.5ms)
+Completed 200 OK in 43ms (Views: 22.6ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/constituencies/new" for 127.0.0.1 at Fri Jan 28 15:35:00 +0100 2011
+  Processing by ConstituenciesController#new as HTML
+Rendered constituencies/_form.html.erb (4.6ms)
+Rendered constituencies/new.html.erb within layouts/application (9.4ms)
+Completed 200 OK in 39ms (Views: 15.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/constituencies" for 127.0.0.1 at Fri Jan 28 15:35:06 +0100 2011
+  Processing by ConstituenciesController#create as HTML
+  Parameters: {"commit"=>"Create Constituency", "authenticity_token"=>"4KO5ytHX894tM2Pa7rKe02PhskWen+O+fIh7r+teQqQ=", "utf8"=>"✓", "constituency"=>{"number"=>"011"}}
+  [1m[35mAREL (0.6ms)[0m  INSERT INTO "constituencies" ("created_at", "updated_at", "number") VALUES ('2011-01-28 14:35:07.047839', '2011-01-28 14:35:07.047839', '011')
+Redirected to http://localhost:3000/constituencies/10
+Completed 302 Found in 28ms
+
+
+Started GET "/constituencies/10" for 127.0.0.1 at Fri Jan 28 15:35:07 +0100 2011
+  Processing by ConstituenciesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mConstituency Load (0.2ms)[0m  [1mSELECT "constituencies".* FROM "constituencies" WHERE ("constituencies"."id" = 10) LIMIT 1[0m
+Rendered constituencies/show.html.erb within layouts/application (144.9ms)
+Completed 200 OK in 236ms (Views: 151.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/constituencies" for 127.0.0.1 at Fri Jan 28 15:40:12 +0100 2011
+  Processing by ConstituenciesController#index as HTML
+  [1m[35mConstituency Load (1.0ms)[0m  SELECT "constituencies".* FROM "constituencies"
+Rendered constituencies/index.html.erb within layouts/application (17.8ms)
+Completed 200 OK in 45ms (Views: 24.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/constituencies/9" for 127.0.0.1 at Fri Jan 28 15:40:16 +0100 2011
+  Processing by ConstituenciesController#show as HTML
+  Parameters: {"id"=>"9"}
+  [1m[36mConstituency Load (0.2ms)[0m  [1mSELECT "constituencies".* FROM "constituencies" WHERE ("constituencies"."id" = 9) LIMIT 1[0m
+Rendered constituencies/show.html.erb within layouts/application (243.5ms)
+Completed 200 OK in 270ms (Views: 249.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/constituencies/3" for 127.0.0.1 at Fri Jan 28 15:40:22 +0100 2011
+  Processing by ConstituenciesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[35mConstituency Load (0.2ms)[0m  SELECT "constituencies".* FROM "constituencies" WHERE ("constituencies"."id" = 3) LIMIT 1
+Rendered constituencies/show.html.erb within layouts/application (111.8ms)
+Completed 200 OK in 140ms (Views: 117.7ms | ActiveRecord: 0.2ms)

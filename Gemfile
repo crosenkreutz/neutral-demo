@@ -12,6 +12,7 @@ gem 'declarative_authorization'
 gem 'omniauth'
 gem 'mongrel', '1.2.0.pre2'
 gem 'compass'
+gem 'json'
 
 # Use unicorn as the web server
 # gem 'unicorn'

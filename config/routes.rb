@@ -1,5 +1,7 @@
 NeutralDemo::Application.routes.draw do
   
+  resources :constituencies
+
   match '/auth/:provider/callback' => 'authentications#create'
   resources :authentications
   devise_for :users, :controllers => {:registrations => 'registrations'}
